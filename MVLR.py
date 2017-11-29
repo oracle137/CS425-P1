@@ -1,16 +1,16 @@
-import binascii
-import timeit
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+
 
 def normal_eqn(X, Y):
   theta = np.dot(np.linalg.inv(np.dot(X.T, X)),np.dot(X.T, Y))
   return theta
 
+
 def standarize(A):
     A = (A - np.mean(A, axis=0)) / np.std(A, axis=0)
     return A
+
 
 def linear_regression():
     data = np.genfromtxt('auto-mpg.data.csv',usecols=(0,1,2,3,4,5,6),skip_header=True,delimiter=',')
