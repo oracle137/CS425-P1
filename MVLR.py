@@ -60,8 +60,6 @@ def linear_regression():
     avg_error1 = sum / len(E_data2)
     print("Average Error on Validation Data: ", avg_error1)
 
-    return (avg_error+avg_error1)/2
-
 
 linear_regression()
 

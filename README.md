@@ -1,1 +1,1 @@
-Linear Regression Analysis of Auto MPG data
+Multivariate Linear Regression Analysis of Auto MPG data from scratch
