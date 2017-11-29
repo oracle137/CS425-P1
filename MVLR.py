@@ -6,15 +6,14 @@ import matplotlib.pyplot as plt
 
 def normal_eqn(X, Y):
   theta = np.dot(np.linalg.inv(np.dot(X.T, X)),np.dot(X.T, Y))
-      # (X.T * X).I * (X.T * Y)
   return theta
 
 def standarize(A):
     A = (A - np.mean(A, axis=0)) / np.std(A, axis=0)
     return A
 
-def runa():
-    data = np.genfromtxt('Book1.csv',usecols=(0,1,2,3,4,5,6),skip_header=True,delimiter=',')
+def linear_regression():
+    data = np.genfromtxt('auto-mpg.data.csv',usecols=(0,1,2,3,4,5,6),skip_header=True,delimiter=',')
     # print(data)
     # frame = pd.DataFrame(data)
     # print(frame.describe())
@@ -24,6 +23,7 @@ def runa():
             data = np.delete(data,i,0)
         i = i +1
 
+    np.random.seed(100)
     np.random.shuffle(data)  # shuffle
 
     # data = standarize(data)
@@ -41,13 +41,10 @@ def runa():
     Test_Y = Y[int(len(data)*0.75):]
 
 
-    theta_N = normal_eqn(X, Y) #Normal Data
-    # print(theta_N)
     theta_T = normal_eqn(T_X, T_Y) #Training Data
-    print(theta_T)
     E_data = np.dot(Test_X,theta_T) #verification on Test Data
     E_data2 = np.dot(V_X, theta_T)
-    # print(E_data)
+
     error_list=[]
     sum = 0
     for i in range(0,len(E_data)):
@@ -63,23 +60,9 @@ def runa():
     avg_error1 = sum / len(E_data2)
     print("Average Error on Validation Data: ", avg_error1)
 
-    # x = np.linspace(0, len(E_data), len(E_data))
-    #
-    # fig, ax = plt.subplots()
-    #
-    # plt.xlabel('MPG')
-    # plt.ylabel('Error')
-    #
-    # line3,=ax.plot(Test_Y,error_list,'o',label='Error')
-    # ax.legend(loc='lower right')
-    # plt.show()
-
     return (avg_error+avg_error1)/2
 
-# print("Time for 1000 runs:",timeit.timeit(runa,number=1000))
-sumi = 0
-for i in range(0,1):
-    sumi = sumi + runa()
-avgerror = sumi / 1
-print(avgerror)
+
+linear_regression()
+
 
